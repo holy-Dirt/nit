@@ -4,7 +4,8 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>ברוך הבא ל־Nit-Need-It</Text>
+      {/* Welcome message */}
+      <Text style={styles.title}>Welcome to Nit-Need-It</Text>
       <Button
         title="מעבר ללוח הבקשות"
         onPress={() => navigation.navigate('LearnerDashboard')}
