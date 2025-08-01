@@ -17,20 +17,21 @@ const peers = [
 export default function MatchCircleScreen({ navigation }) {
   const { addKarma } = useKarma();
 
-  const onSelect = name => {
-    Alert.alert(`Start helping ${name}?`, '', [
-      {
-        text: 'Cancel',
-        style: 'cancel',
-      },
-      {
-        text: 'OK',
-        onPress: () => {
-          addKarma(10);
-          navigation.navigate('Home');
+  const handlePress = (name) => {
+    Alert.alert(
+      `Start helping ${name}?`,
+      '',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'OK',
+          onPress: () => {
+            addKarma(10);
+            navigation.navigate('Home');
+          },
         },
-      },
-    ]);
+      ]
+    );
   };
 
   const radius = 120;
@@ -43,7 +44,7 @@ export default function MatchCircleScreen({ navigation }) {
       const x = centerX + radius * Math.cos(angle);
       const y = centerY + radius * Math.sin(angle);
       return (
-        <TouchableOpacity key={peer.name} onPress={() => onSelect(peer.name)}>
+        <TouchableOpacity key={peer.name} onPress={() => handlePress(peer.name)}>
           <Circle cx={x} cy={y} r={30} fill="#89CFF0" />
           <SvgText x={x} y={y} fontSize="10" textAnchor="middle" dy="4">
             {peer.name}

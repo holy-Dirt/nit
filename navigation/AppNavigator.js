@@ -8,26 +8,38 @@ import PublishRequestScreen from '../screens/PublishRequestScreen';
 import MatchCircleScreen from '../screens/MatchCircleScreen';
 import KarmaScreen from '../screens/KarmaScreen';
 
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const PublishStack = createNativeStackNavigator();
 
-function Tabs() {
+function PublishStackScreen() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Publish" component={PublishRequestScreen} />
-      <Tab.Screen name="Profile" component={KarmaScreen} />
-    </Tab.Navigator>
+    <PublishStack.Navigator>
+      <PublishStack.Screen
+        name="PublishRequest"
+        component={PublishRequestScreen}
+        options={{ title: 'Publish' }}
+      />
+      <PublishStack.Screen
+        name="MatchCircle"
+        component={MatchCircleScreen}
+        options={{ title: 'Match Peers' }}
+      />
+    </PublishStack.Navigator>
   );
 }
 
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Tabs" component={Tabs} />
-        <Stack.Screen name="MatchCircle" component={MatchCircleScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen
+          name="Publish"
+          component={PublishStackScreen}
+          options={{ headerShown: false }}
+        />
+        <Tab.Screen name="Profile" component={KarmaScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
