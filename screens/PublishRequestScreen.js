@@ -8,18 +8,16 @@ export default function PublishRequestScreen({ navigation }) {
   const [description, setDescription] = useState('');
   const [hours, setHours] = useState('Morning');
   const [recording, setRecording] = useState(null);
-  const [audioUri, setAudioUri] = useState(null);
 
   const record = async () => {
     if (recording) {
       await recording.stopAndUnloadAsync();
-      setAudioUri(recording.getURI());
       setRecording(null);
     } else {
       const { status } = await Audio.requestPermissionsAsync();
       if (status === 'granted') {
         const { recording: rec } = await Audio.Recording.createAsync(
-          Audio.RecordingOptionsPresets.HIGH_QUALITY,
+          Audio.RecordingOptionsPresets.HIGH_QUALITY
         );
         setRecording(rec);
       }
@@ -29,7 +27,11 @@ export default function PublishRequestScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Topic</Text>
-      <Picker selectedValue={topic} onValueChange={(v) => setTopic(v)} style={styles.picker}>
+      <Picker
+        selectedValue={topic}
+        onValueChange={(v) => setTopic(v)}
+        style={styles.picker}
+      >
         <Picker.Item label="Math" value="Math" />
         <Picker.Item label="Science" value="Science" />
         <Picker.Item label="History" value="History" />
@@ -37,6 +39,7 @@ export default function PublishRequestScreen({ navigation }) {
         <Picker.Item label="Music" value="Music" />
         <Picker.Item label="Sports" value="Sports" />
       </Picker>
+
       <Text style={styles.label}>Short Description</Text>
       <TextInput
         style={styles.input}
@@ -44,14 +47,27 @@ export default function PublishRequestScreen({ navigation }) {
         value={description}
         onChangeText={setDescription}
       />
+
       <Text style={styles.label}>Preferred Hours</Text>
-      <Picker selectedValue={hours} onValueChange={(v) => setHours(v)} style={styles.picker}>
+      <Picker
+        selectedValue={hours}
+        onValueChange={(v) => setHours(v)}
+        style={styles.picker}
+      >
         <Picker.Item label="Morning" value="Morning" />
         <Picker.Item label="Afternoon" value="Afternoon" />
         <Picker.Item label="Evening" value="Evening" />
       </Picker>
-      <Button title={recording ? 'Stop Recording' : 'Record'} onPress={record} />
-      <Button title="Publish" onPress={() => navigation.navigate('MatchCircle')} />
+
+      <Button
+        title={recording ? 'Stop Recording' : 'Record'}
+        onPress={record}
+      />
+
+      <Button
+        title="Publish"
+        onPress={() => navigation.navigate('MatchCircle')}
+      />
     </View>
   );
 }
@@ -59,6 +75,6 @@ export default function PublishRequestScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20 },
   label: { marginTop: 10 },
-  input: { borderWidth: 1, padding: 8, marginBottom: 10 },
+  input: { borderWidth: 1, padding: 8, marginBottom: 10, borderRadius: 4, borderColor: '#ccc' },
   picker: { height: 50 },
 });

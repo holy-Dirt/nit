@@ -1,11 +1,15 @@
+import react from 'eslint-plugin-react';
+
 export default [
   {
     files: ['**/*.js'],
     languageOptions: {
-      ecmaVersion: 2021,
+      ecmaVersion: 'latest',
       sourceType: 'module',
     },
-    rules: {
+    plugins: {
+      react,
     },
+    rules: {},
   },
 ];
